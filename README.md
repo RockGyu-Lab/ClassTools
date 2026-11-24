@@ -6,6 +6,11 @@
 - 인터넷이 되면: https://rockgyu-lab.github.io/ClassTools/ 를 열면 됩니다(설치 필요 없음).
 - 인터넷이 없으면: 저장소를 내려받아 `index.html`을 더블클릭해 엽니다.
 
+## 구성
+- 메인 화면 → 분야별 도구실 → 도구의 세 층입니다(지구과학 World와 같은 방식).
+- **수업 도구** (`Lesson/`): 광물 비즈 재료 뽑기
+- **담임 업무** (`Homeroom/`): 준비 중
+
 ## 다른 컴퓨터에서 이어서 작업하기
 ```
 git clone https://github.com/RockGyu-Lab/ClassTools.git
