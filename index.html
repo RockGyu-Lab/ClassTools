@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>ClassTools</title>
+<style>
+:root{--bg:#f3f4f8;--fg:#1b1f2a;--muted:#5a6070;--card:#fff;--line:#e3e6ee;--blue:#5468d4;--acc-bg:#eef0fc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161d;--fg:#e8eaf2;--muted:#a3a9bb;--card:#1f222c;--line:#2c3247;--blue:#8f9cf0;--acc-bg:#1e2340}}
+:root[data-theme="dark"]{--bg:#14161d;--fg:#e8eaf2;--muted:#a3a9bb;--card:#1f222c;--line:#2c3247;--blue:#8f9cf0;--acc-bg:#1e2340}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:"Pretendard Variable",Pretendard,"Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;word-break:keep-all}
+header{background:linear-gradient(135deg,#1d2b5c,#3b4fb0);color:#fff;padding:44px 20px 38px;text-align:center}
+header h1{margin:0 0 6px;font-size:clamp(2rem,5vw,2.8rem)}
+header p{margin:0;color:#e3e8fb}
+main{max-width:1000px;margin:0 auto;padding:28px 18px 48px}
+h2{font-size:1.3rem;margin:0 0 14px}
+.tool-list{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.tool{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid transparent;border-radius:14px;padding:20px;text-decoration:none;color:inherit;box-shadow:0 1px 3px rgba(20,25,45,.06),0 6px 20px rgba(20,25,45,.05);transition:transform .15s,box-shadow .15s,border-color .15s}
+.tool:hover{transform:translateY(-2px);border-color:var(--blue)}
+.tool:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.symbol{display:grid;place-items:center;flex:0 0 56px;width:56px;height:56px;border-radius:12px;background:var(--acc-bg);font-size:1.8rem}
+.tool h3{margin:0 0 2px;font-size:1.1rem}
+.tool p{margin:0;color:var(--muted);font-size:.94rem}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--muted)}
+.note{margin-top:22px;color:var(--muted);font-size:.9rem}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+</head>
+<body>
+<header>
+  <h1>ClassTools</h1>
+  <p>수업과 담임 업무에 쓰는 작은 도구 모음</p>
+</header>
+<main>
+  <h2>도구 목록</h2>
+  <div class="tool-list">
+    <div class="empty">아직 만든 도구가 없습니다.</div>
+  </div>
+  <p class="note">학생 명단 같은 개인정보는 이 사이트에 저장되지 않습니다. 필요할 때 화면에 넣으면, 지금 쓰는 기기의 브라우저에만 남습니다.</p>
+</main>
+<script src="./copyright.js"></script>
+</body>
+</html>
