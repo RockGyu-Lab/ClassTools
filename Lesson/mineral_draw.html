@@ -29,8 +29,8 @@ main{max-width:1200px;margin:0 auto;padding:16px 18px 20px}
 .inner{position:absolute;inset:0;transition:transform .5s ease;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
 .cardbtn.open .inner{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center}
-/* 뒤집기 전: 따뜻한 자줏빛 적갈색 바탕 + 금빛 테두리 + 수정 결정 선화 (화면 모드와 상관없는 고정색) */
-.front{background:radial-gradient(120% 80% at 30% 0%,rgba(196,110,92,.45) 0%,transparent 60%),linear-gradient(165deg,#3b1520,#5e2230 55%,#4a1c38);color:#f6dca4;box-shadow:0 2px 6px rgba(45,20,20,.25),0 6px 16px rgba(45,20,20,.12)}
+/* 뒤집기 전: 따뜻한 호박색 바탕 + 금빛 테두리 + 수정 결정 선화 (화면 모드와 상관없는 고정색) */
+.front{background:radial-gradient(120% 80% at 30% 0%,rgba(236,170,72,.5) 0%,transparent 60%),linear-gradient(165deg,#3e2207,#704010 55%,#52300c);color:#fbe3ad;box-shadow:0 2px 6px rgba(50,30,10,.25),0 6px 16px rgba(50,30,10,.12)}
 .front::before{content:"";position:absolute;inset:calc(var(--cw)*.055);border:1px solid rgba(240,205,140,.5);border-radius:8px;pointer-events:none}
 .cardbtn:not(:disabled):hover .front{filter:brightness(1.18)}
 .front .xtal{width:42%;height:auto;margin-top:2%;opacity:.85}
