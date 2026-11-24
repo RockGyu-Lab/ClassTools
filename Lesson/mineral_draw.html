@@ -7,7 +7,7 @@
 <title>광물 비즈 재료 뽑기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
-:root{color-scheme:light dark;--bg:#f3f4f8;--fg:#1b1f2a;--muted:#5a6070;--card:#fff;--line:#e3e6ee;--acc:#3b4fb0;--on-acc:#fff;--acc-bg:#eef0fc;--back1:#26337a;--back2:#4257c2;--done:#e9ecf4;--done-fg:#3a4152}
+:root{color-scheme:light dark;--bg:#f3f4f8;--fg:#1b1f2a;--muted:#5a6070;--card:#fff;--line:#e3e6ee;--acc:#3b4fb0;--on-acc:#fff;--acc-bg:#eef0fc;--done:#e9ecf4;--done-fg:#3a4152}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161d;--fg:#e8eaf2;--muted:#a3a9bb;--card:#1f222c;--line:#2c3247;--acc:#8f9cf0;--on-acc:#10142a;--acc-bg:#1e2340;--done:#262a36;--done-fg:#d6dbea}}
 :root[data-theme="dark"]{--bg:#14161d;--fg:#e8eaf2;--muted:#a3a9bb;--card:#1f222c;--line:#2c3247;--acc:#8f9cf0;--on-acc:#10142a;--acc-bg:#1e2340;--done:#262a36;--done-fg:#d6dbea}
 *{box-sizing:border-box}
@@ -29,15 +29,19 @@ main{max-width:1200px;margin:0 auto;padding:16px 18px 20px}
 .inner{position:absolute;inset:0;transition:transform .5s ease;transform-style:preserve-3d;-webkit-transform-style:preserve-3d}
 .cardbtn.open .inner{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;backface-visibility:hidden;-webkit-backface-visibility:hidden;text-align:center}
-.front{background:radial-gradient(1px 1px at 25% 30%,#ffffffaa,transparent),radial-gradient(1.2px 1.2px at 70% 65%,#ffffff88,transparent),linear-gradient(145deg,var(--back1),var(--back2));color:#fff;box-shadow:0 2px 6px rgba(20,25,45,.18)}
-.cardbtn:not(:disabled):hover .front{filter:brightness(1.15)}
-.front .num{font-size:calc(var(--cw)*.3);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
-.front .gem{font-size:calc(var(--cw)*.13);opacity:.75}
-.backface{transform:rotateY(180deg);background:var(--done);color:var(--done-fg);border:1px solid var(--line);gap:2px;padding:6px}
+/* 뒤집기 전: 따뜻한 자줏빛 적갈색 바탕 + 금빛 테두리 + 수정 결정 선화 (화면 모드와 상관없는 고정색) */
+.front{background:radial-gradient(120% 80% at 30% 0%,rgba(196,110,92,.45) 0%,transparent 60%),linear-gradient(165deg,#3b1520,#5e2230 55%,#4a1c38);color:#f6dca4;box-shadow:0 2px 6px rgba(45,20,20,.25),0 6px 16px rgba(45,20,20,.12)}
+.front::before{content:"";position:absolute;inset:calc(var(--cw)*.055);border:1px solid rgba(240,205,140,.5);border-radius:8px;pointer-events:none}
+.cardbtn:not(:disabled):hover .front{filter:brightness(1.18)}
+.front .xtal{width:42%;height:auto;margin-top:2%;opacity:.85}
+.front .num{font-size:calc(var(--cw)*.26);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1;margin-top:4%;text-shadow:0 2px 6px rgba(0,0,0,.45)}
+/* 펼친 면: 광물 대표색의 원석 구슬과 테두리(--gem) */
+.backface{--gem:#9aa0ad;transform:rotateY(180deg);background:var(--done);color:var(--done-fg);border:2px solid var(--gem);gap:2px;padding:6px}
+.gemdot{display:block;flex:0 0 auto;width:calc(var(--cw)*.26);height:calc(var(--cw)*.26);border-radius:50%;margin-bottom:5%;box-shadow:inset -3px -4px 7px rgba(0,0,0,.28),inset 2px 2px 5px rgba(255,255,255,.55),0 1px 3px rgba(0,0,0,.25)}
 .backface .num{font-size:max(11px,calc(var(--cw)*.1));color:var(--muted);font-variant-numeric:tabular-nums}
-.backface .en{font-size:max(11px,calc(var(--cw)*.145));font-weight:700;line-height:1.15;overflow-wrap:anywhere}
+.backface .en{font-size:max(11px,calc(var(--cw)*.135));font-weight:700;line-height:1.15;letter-spacing:-.01em;overflow-wrap:break-word;max-width:100%}
 .backface .ko{font-size:max(10px,calc(var(--cw)*.13));color:var(--muted);line-height:1.15}
-.cardbtn.latest .backface{border:2px solid var(--acc)}
+.cardbtn.latest .backface{box-shadow:0 0 0 3px var(--acc)}
 
 /* 오른쪽 기록판 */
 .side{display:flex;flex-direction:column;max-height:var(--side-h,none);background:var(--card);border-radius:14px;padding:14px 16px;box-shadow:0 1px 3px rgba(20,25,45,.06),0 6px 20px rgba(20,25,45,.05)}
@@ -62,6 +66,7 @@ dialog.ov{width:auto;height:auto;max-width:none;max-height:none;margin:0;border:
 dialog.ov::backdrop{background:transparent}
 .box{background:var(--card);color:var(--fg);border-radius:18px;padding:22px 24px;width:min(560px,100%);box-shadow:0 20px 60px rgba(0,0,0,.35)}
 .reveal{text-align:center;padding:34px 24px 26px}
+.reveal .gemdot{width:76px;height:76px;margin:0 auto 14px}
 .reveal .which{color:var(--muted);font-size:1.05rem;margin:0}
 .reveal .big{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;margin:10px 0 2px;line-height:1.15;color:var(--acc)}
 .reveal .kor{font-size:clamp(1.3rem,3.4vw,2rem);font-weight:700;margin:0 0 18px}
@@ -103,6 +108,7 @@ dialog.ov::backdrop{background:transparent}
 
 <!-- 뽑은 광물 크게 보여 주기 -->
 <dialog class="ov" id="ovShow" aria-label="뽑은 광물"><div class="box reveal">
+  <span class="gemdot" id="shGem" aria-hidden="true"></span>
   <p class="which" id="shWhich"></p>
   <p class="big" id="shEn"></p>
   <p class="kor" id="shKo"></p>
@@ -146,6 +152,46 @@ const DEFAULT = [
 ];
 const KEY = 'classtools-mineral-draw-v1';
 
+// 광물 대표색: [테두리 색, 구슬 무늬]. 목록 고치기로 넣은 다른 광물은 회색 구슬
+const ball = (hi, mid, lo) => `radial-gradient(circle at 35% 30%,${hi},${mid} 58%,${lo})`;
+const shine = 'radial-gradient(circle at 35% 28%,rgba(255,255,255,.75),transparent 38%)';
+const band = (deg, ...c) => `${shine},repeating-linear-gradient(${deg}deg,${c.map((x, k) => `${x} ${k * 4}px ${(k + 1) * 4}px`).join(',')})`;
+const needles = (base, n) => `${shine},repeating-linear-gradient(62deg,transparent 0 6px,${n} 6px 7px,transparent 7px 13px),repeating-linear-gradient(-28deg,transparent 0 9px,${n} 9px 10px),${base}`;
+const GEM = {
+  'Green Aventurine': ['#3e9a62', ball('#b9f0c8', '#3e9a62', '#1f5e3a')],
+  'Beryl': ['#5fae96', ball('#d4f3e8', '#7fc8b0', '#3d806c')],
+  'White Phantom Quartz': ['#a9b2c2', `${shine},radial-gradient(circle at 50% 60%,transparent 28%,rgba(160,170,190,.55) 30% 34%,transparent 36%),${ball('#ffffff', '#e4e8ef', '#b3bccb')}`],
+  'Amazonite': ['#2f9e93', ball('#c4f2ea', '#3fb3a6', '#1e6f67')],
+  'Sunstone': ['#d9782a', `radial-gradient(circle at 60% 55%,#fff6 0 1.5px,transparent 2px),radial-gradient(circle at 40% 70%,#fff5 0 1px,transparent 1.5px),${ball('#ffd3a1', '#e3893a', '#9c4a14')}`],
+  'Howlite': ['#9a9a94', `${shine},linear-gradient(120deg,transparent 40%,#8d8d8d 41% 43%,transparent 44%),linear-gradient(30deg,transparent 60%,#9a9a9a 61% 62%,transparent 63%),${ball('#ffffff', '#efefea', '#c9c9c2')}`],
+  'India Agate': ['#8a6d5a', band(20, '#c9b3a0', '#8a6d5a', '#e3d6c8', '#6b5243', '#b59a85')],
+  'Garnet': ['#8e1b2c', ball('#f08a96', '#a3203a', '#4f0b16')],
+  "Tiger's Eye": ['#b8742a', band(115, '#5a3410', '#c98a2e', '#e0b052', '#7a4a18')],
+  'Peridot': ['#86a61f', ball('#e8f7a6', '#9cbf2b', '#567012')],
+  'Pink Tourmaline': ['#d0598f', ball('#ffd0e4', '#e47aa8', '#a3366a')],
+  "Red Tiger's Eye": ['#9c3a24', band(115, '#5c1a10', '#c4553a', '#e07a52', '#8a2f1e')],
+  'Lemon Quartz': ['#c9b51e', ball('#fffbd0', '#f0e04a', '#b29f14')],
+  'Tourmaline': ['#3a3a42', ball('#8a8a96', '#2a2a2e', '#0c0c10')],
+  'Red Jasper': ['#a8372b', ball('#e7897d', '#a8372b', '#5e1712')],
+  'Citrine': ['#d9a21b', ball('#fff1a8', '#e3a81e', '#a8700a')],
+  'Blue Aventurine': ['#2f5fa8', `radial-gradient(circle at 62% 60%,#fff8 0 1px,transparent 1.5px),radial-gradient(circle at 45% 72%,#fff6 0 1px,transparent 1.5px),${ball('#a9c4f2', '#2f5fa8', '#14305e')}`],
+  'Labradorite': ['#4f7f8f', `${shine},radial-gradient(ellipse at 60% 60%,rgba(80,200,210,.75),transparent 45%),radial-gradient(ellipse at 35% 70%,rgba(70,110,220,.6),transparent 40%),${ball('#9aa3a8', '#5d6870', '#2c3236')}`],
+  'Yellow Aventurine': ['#c99d22', ball('#fbe7a6', '#d9b23a', '#8c6c12')],
+  'Aquamarine': ['#4fa9c8', ball('#e2f6fd', '#7fc8e0', '#3a8aa6')],
+  'Fluorite': ['#7d63c4', `${shine},linear-gradient(160deg,#b9a3f0 0 30%,#8f6fd0 30% 55%,#6fcf9e 55% 78%,#4aa77a 78%)`],
+  'Carnelian': ['#c9502a', ball('#ffb48f', '#d0552a', '#83290e')],
+  'Rutilated Quartz': ['#9aa7b8', needles(ball('#ffffff', '#e8edf3', '#b7c2cf'), 'rgba(120,80,40,.6)')],
+  'Amethyst': ['#8a63c9', ball('#d9b8ff', '#7a3fc0', '#4a2380')],
+  'Rose Quartz': ['#dd8ea2', ball('#fff0f4', '#f2b6c4', '#c97890')],
+  'Clear Quartz': ['#9fb0c4', ball('#ffffff', '#eef3f8', '#b9c6d4')],
+  'Golden Rutilated Quartz': ['#c99a2e', needles(ball('#ffffff', '#f3efe2', '#cdbf9a'), 'rgba(214,160,40,.85)')],
+};
+const gemOf = en => GEM[en] || ['#9aa0ad', ball('#eceef2', '#b4b9c4', '#7a808c')];
+
+// 뒤집기 전 면의 수정 결정 선화 (육각기둥 + 양쪽 뿔)
+const XTAL = '<svg class="xtal" viewBox="0 0 60 110" fill="none" stroke="#f3d38f" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true">' +
+  '<path d="M30 4 L48 26 L48 86 L30 106 L12 86 L12 26 Z"/><path d="M30 4 L24 26 L24 92 M30 4 L37 26 L37 92 M12 26 H48 M12 86 L24 92 L37 92 L48 86 M24 92 L30 106 L37 92"/></svg>';
+
 // 상태: list = 광물 목록, picked = [{c: 카드 번호(0부터), m: 광물 번호}] 뽑은 순서
 let state = load();
 
@@ -186,8 +232,8 @@ function build() {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'cardbtn';
-    b.innerHTML = `<span class="inner"><span class="face front"><span class="num">${i + 1}</span><span class="gem" aria-hidden="true">◆</span></span>` +
-                  `<span class="face backface"><span class="num"></span><span class="en"></span><span class="ko"></span></span></span>`;
+    b.innerHTML = `<span class="inner"><span class="face front">${XTAL}<span class="num">${i + 1}</span></span>` +
+                  `<span class="face backface"><span class="gemdot" aria-hidden="true"></span><span class="num"></span><span class="en"></span><span class="ko"></span></span></span>`;
     b.addEventListener('click', () => pick(i));
     grid.append(b);
     return b;
@@ -235,12 +281,17 @@ function render() {
     const back = b.querySelector('.backface');
     if (p) {
       const n = split(state.list[p.m]);
+      const [edge, look] = gemOf(n.en);
+      back.style.setProperty('--gem', edge);
+      back.querySelector('.gemdot').style.background = look;
       back.querySelector('.num').textContent = `${i + 1}번 · ${p.k + 1}번째`;
       back.querySelector('.en').textContent = n.en;
       back.querySelector('.ko').textContent = n.ko;
       b.setAttribute('aria-label', `${i + 1}번 카드, ${n.en}${n.ko ? ' ' + n.ko : ''}, 이미 뽑음`);
     } else {
       back.querySelector('.num').textContent = back.querySelector('.en').textContent = back.querySelector('.ko').textContent = '';
+      back.style.removeProperty('--gem');
+      back.querySelector('.gemdot').style.background = '';
       b.setAttribute('aria-label', `${i + 1}번 카드, 아직 뽑지 않음`);
     }
   });
@@ -277,6 +328,7 @@ function pick(i) {
   const n = split(state.list[m]);
   $('shWhich').textContent = `${i + 1}번 카드 · ${state.picked.length}번째`;
   $('shEn').textContent = n.en;
+  $('shGem').style.background = gemOf(n.en)[1];
   $('shKo').textContent = n.ko ? `(${n.ko})` : '';
   $('shKo').hidden = !n.ko;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;

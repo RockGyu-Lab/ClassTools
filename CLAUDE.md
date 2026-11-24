@@ -11,7 +11,7 @@ README.md           사용자용 설명서
 .claude/skills/modern-html/SKILL.md   코드 작성법 스킬 (지구과학 World에서 복사)
 Lesson/             수업 도구실
   Lesson_index.html 도구실 메뉴 (도구 01~ 카드)
-  mineral_draw.html 도구 01 광물 비즈 재료 뽑기 (카드 27장을 골라 광물을 무작위로, 한 번 나온 것은 다시 안 나옴. 기록은 기기 localStorage. 카드 크기는 fit()이 화면에 꽉 차게 정함, iPad 가로 기준)
+  mineral_draw.html 도구 01 광물 비즈 재료 뽑기 (카드 27장을 골라 광물을 무작위로, 한 번 나온 것은 다시 안 나옴. 기록은 기기 localStorage. 카드 크기는 fit()이 화면에 꽉 차게 정함, iPad 가로 기준. 뒷면은 적갈색 바탕 + 금빛 수정 결정, 펼친 면은 GEM 표의 광물 대표색 구슬)
 Homeroom/           담임 업무 도구실
   Homeroom_index.html 도구실 메뉴 (아직 도구 없음)
 mineral_draw.html   예전 주소 → Lesson/mineral_draw.html로 바로 넘겨 주는 페이지 (예전 링크용, 지우지 않음)
